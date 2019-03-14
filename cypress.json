@@ -1,0 +1,17 @@
+{
+    "chromeWebSecurity": false,
+    "fixturesFolder": "src/test/fixtures",
+    "integrationFolder": "src/test/specs",
+    "pluginsFile": "src/test/plugins",
+    "screenshotsFolder": "src/test/screenshots",
+    "supportFile": "src/test/support",
+    "videosFolder": "src/test/videos",
+    "reporter": "mochawesome",
+    "reporterOptions": {
+      "reportDir": "mochawesome-report",
+      "overwrite": false,
+      "html": true,
+      "json": true
+    }
+  }
+  

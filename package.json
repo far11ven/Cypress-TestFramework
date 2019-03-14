@@ -1,0 +1,21 @@
+{
+  "name": "cypress_demo",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "",
+  "main": "",
+  "scripts": {
+    "test": "./node_modules/.bin/cypress run --reporter mochawesome",
+    "cy": "./node_modules/.bin/cypress open",
+    "cy_test": "node cypress.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^3.1.5",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "mochawesome-merge": "^1.0.7"
+  }
+}
