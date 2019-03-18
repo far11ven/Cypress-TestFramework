@@ -1,30 +1,64 @@
 var config = require('../../../config.json')
 var configjs = require('../../../config')
+const addContext = require('mochawesome/addContext');
 import HomePage from '../pages/HomePage'
 
-describe('My First Test', function() {
-    it('validate page title', function() {
-      
-      //alert(config.url);
-      //alert(configjs.url);
+describe('My First Test', function () {
 
-      cy.viewport(1440,1200)
-      cy.visit(config.url);
-      cy.title().should('eq', 'Alberta Test Store')
+  const spec_title = this.title
+  var homePage = new HomePage();
+    
+  Cypress.on('test:after:run', (test) => {
 
-    })
+    if (test.state === 'failed') {
+      addContext({ test }, {
+        title: 'Failing Screenshot: ' + '>> screenshots/' + Cypress.spec.name + '/' + spec_title + ' -- ' + test.title + ' (failed)' + '.png <<',
+        value: 'screenshots/' + Cypress.spec.name + '/' + spec_title + ' -- ' + test.title + ' (failed)' + '.png'
+      })
+    }
+  });
 
-    it('goto API Log Page', function() {
-      
-      //alert(config.url);
 
-      cy.viewport(1440,1200)
-      cy.visit(config.url);
-      var homePage = new HomePage();
-      homePage.clickAPILogTraceButton();
+  it('Navigate to HomePage1', function () {
+    //alert(config.url);
 
-      //cy.get('#twotabsearchtextbox').type('Superman')
-      //cy.get('.nav-search-submit .nav-input').click()
-      //cy.get('span.a-color-state').contains('Superman')
-    })
+    cy.visit(config.url);
+
+    cy.title().should('eq', 'Test Store1')
+    cy.title().should('eq', 'Test Store')
+    homePage.clickAPILogTraceButton();
+
+
+
+    //addContext(this, 'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==')
+
+    //cy.get('#twotabsearchtextbox').type('Superman')
+    //cy.get('.nav-search-submit .nav-input').click()
+    //cy.get('span.a-color-state').contains('Superman')
   })
+
+  it('Navigate to HomePage2', function () {
+    //alert(config.url);
+
+    cy.visit(config.url);
+    cy.title().should('eq', 'Test Store')
+    homePage.clickAPILogTraceButton();
+    cy.title().should('eq', 'Test Store1')
+
+  })
+
+  it('goto API Log Page1', function () {
+    //alert(config.url);
+
+    cy.visit(config.url);
+    cy.title().should('eq', 'Test Store')
+    
+
+    //addContext(this, 'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==')
+
+    //cy.get('#twotabsearchtextbox').type('Superman')
+    //cy.get('.nav-search-submit .nav-input').click()
+    //cy.get('span.a-color-state').contains('Superman')
+  })
+})
+

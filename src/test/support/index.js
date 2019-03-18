@@ -15,10 +15,11 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+const moment = require('moment')
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 beforeEach(function () {
-  cy.log('running before function')
+  cy.log('Test run started on : ' + new moment().format('DD-MM-YYYY HH:mm:ss'));
 })

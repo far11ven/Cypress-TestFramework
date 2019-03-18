@@ -7,7 +7,7 @@
   "scripts": {
     "test": "./node_modules/.bin/cypress run --reporter mochawesome",
     "cy": "./node_modules/.bin/cypress open",
-    "cy_test": "node cypress.js"
+    "cy_test": "node cy_test.js"
   },
   "author": "",
   "license": "ISC",

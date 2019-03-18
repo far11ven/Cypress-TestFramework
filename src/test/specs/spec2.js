@@ -1,30 +1,26 @@
 var config = require('../../../config.json')
 var configjs = require('../../../config')
+const addContext = require('mochawesome/addContext');
 import HomePage from '../pages/HomePage'
 
-describe('My Second Test', function() {
-    it('validate page title', function() {
-      
-      //alert(config.url);
-      //alert(configjs.url);
+describe('My Second Test', function () {
 
-      cy.viewport(1440,1200)
-      cy.visit(config.url);
-      cy.title().should('eq', 'Alberta Test Store')
+  const spec_title = this.title
 
-    })
+  Cypress.on('test:after:run', (test) => {
 
-    it('goto API Log Page', function() {
-      
-      //alert(config.url);
+    if (test.state === 'failed') {
+      addContext({ test }, {
+        title: 'Failing Screenshot: ' + '>> screenshots/' + Cypress.spec.name + '/' + spec_title + ' -- ' + test.title + ' (failed)' + '.png <<',
+        value: 'screenshots/' + Cypress.spec.name + '/' + spec_title + ' -- ' + test.title + ' (failed)' + '.png'
+      })
+    }
+  });
 
-      cy.viewport(1440,1200)
-      cy.visit(config.url);
-      var homePage = new HomePage();
-      homePage.clickAPILogTraceButton();
 
-      //cy.get('#twotabsearchtextbox').type('Superman')
-      //cy.get('.nav-search-submit .nav-input').click()
-      //cy.get('span.a-color-state').contains('Superman')
-    })
+  it('goto API Log Page2', function () {
+
+    cy.visit(config.url);
   })
+})
+
