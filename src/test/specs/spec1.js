@@ -24,8 +24,8 @@ describe('My First Test', function () {
 
     cy.visit(config.url);
 
-    cy.title().should('eq', 'Test Store1')
-    cy.title().should('eq', 'Test Store')
+    cy.title().should('eq', ' Test Store1')
+    cy.title().should('eq', ' Test Store')
     homePage.clickAPILogTraceButton();
 
 
@@ -41,9 +41,9 @@ describe('My First Test', function () {
     //alert(config.url);
 
     cy.visit(config.url);
-    cy.title().should('eq', 'Test Store')
+    cy.title().should('eq', ' Test Store')
     homePage.clickAPILogTraceButton();
-    cy.title().should('eq', 'Test Store1')
+    
 
   })
 
@@ -51,7 +51,9 @@ describe('My First Test', function () {
     //alert(config.url);
 
     cy.visit(config.url);
-    cy.title().should('eq', 'Test Store')
+    cy.title().should('eq', ' Test Store')
+    homePage.clickGearIcon();
+    cy.title().should('eq', ' Test Store1')
     
 
     //addContext(this, 'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==')

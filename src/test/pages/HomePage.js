@@ -8,6 +8,10 @@ class HomePage {
     clickAPILogTraceButton() {
       return cy.get(elements.HOMEPAGE.API_LOG_TRACE).click();
     }
+
+    clickGearIcon() {
+      return cy.get(elements.HOMEPAGE.ICON_GEAR).click();
+    }
     
   }
   

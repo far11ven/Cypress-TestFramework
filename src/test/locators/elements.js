@@ -1,5 +1,6 @@
 module.exports = {
     HOMEPAGE:{
-        API_LOG_TRACE: "div.trace-btn"
+        API_LOG_TRACE: "div.trace-btn",
+        ICON_GEAR: "div#configuration-page"
     } 
 }

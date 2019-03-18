@@ -21,6 +21,7 @@ const finalReport = {
 cypress.run({
     config: {
         screenshotsFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/screenshots',
+        video: false,
         videosFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/videos'
     },
     reporter: 'mochawesome',

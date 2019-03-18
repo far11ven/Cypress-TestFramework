@@ -1,15 +1,17 @@
 {
-    "chromeWebSecurity": false,
-    "fixturesFolder": "src/test/fixtures",
-    "integrationFolder": "src/test/specs",
-    "pluginsFile": "src/test/plugins",
-    "supportFile": "src/test/support",
-    "reporter": "mochawesome",
-    "reporterOptions": {
-      "reportDir": "reports/mochawesome-report",
-      "overwrite": false,
-      "html": true,
-      "json": true
-    }
+  "baseUrl": "https://alberta-test-store.apps.stl.pcfdev00.mastercard.int/",
+  "chromeWebSecurity": false,
+  "viewportWidth": 1500,
+  "viewportHeight": 1200,
+  "fixturesFolder": "src/test/fixtures",
+  "integrationFolder": "src/test/specs",
+  "pluginsFile": "src/test/plugins",
+  "supportFile": "src/test/support",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "reports/mochawesome-report",
+    "overwrite": false,
+    "html": true,
+    "json": true
   }
-  
+}
