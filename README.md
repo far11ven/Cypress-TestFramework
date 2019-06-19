@@ -4,7 +4,7 @@ A simple JS Testing framework using [Cypress](https://github.com/cypress-io/cypr
 ### Dependencies: ###
 
 ```"devDependencies": {
-    "cypress": "^3.1.5",
+    "cypress": "^3.2.0",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
     "mochawesome-merge": "^1.0.7"

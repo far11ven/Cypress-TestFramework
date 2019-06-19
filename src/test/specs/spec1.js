@@ -16,6 +16,7 @@ describe('My First Test', function () {
     homePage.clickSearchTxtBox();
     homePage.typeInSearchTxtBox('Superman');
     homePage.submitSearchQuery();
+    homePage.verifyFirstResult();
 
 
 

@@ -31,8 +31,7 @@ cypress.run({
         html: true,
         json: true
     }
-}).then(
-    () => {
+}).then(() => {
         generateReport()
     },
     error => {

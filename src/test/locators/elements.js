@@ -1,6 +1,6 @@
 module.exports = {
     HOMEPAGE:{
         SEARCH_TXTBOX: "input[name='q']",
-        ICON_GEAR: "div#configuration-page"
+        SEARCH_RESULT_FIRST: "div.r"
     } 
 }
