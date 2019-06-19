@@ -17,9 +17,19 @@ const finalReport = {
     reportTitle: 'Run-Report',
     reportPageTitle: 'Run-Report'
 }
+// const args = require('minimist')(process.argv.slice(2));
+// console.log("args :", args);
+// console.log("speclist :", args['speclist']);
+
+// const speclist = JSON.parse(args['speclist']);
 
 cypress.run({
+    //spec: ["src/test/specs/spec3.js", "src/test/specs/spec1.js"],     //provide spec files manually
+    //spec: "src/test/specs/*",     
+    //spec: speclist, //|| "src/test/specs/*",                          // run all specs if no speclist received from commandline     
+    //spec: speclist,                               
     config: {
+        pageLoadTimeout: 10000,
         screenshotsFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/screenshots',
         video: false,
         videosFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/videos'

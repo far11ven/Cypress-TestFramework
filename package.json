@@ -6,8 +6,9 @@
   "main": "",
   "scripts": {
     "test": "./node_modules/.bin/cypress run --reporter mochawesome",
-    "cy": "./node_modules/.bin/cypress open",
-    "cy_test": "node cy_test.js"
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "./node_modules/.bin/cypress run",
+    "cy:test": "node cy_test.js"
   },
   "author": "far11ven",
   "license": "ISC",

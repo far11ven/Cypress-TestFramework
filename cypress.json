@@ -1,12 +1,13 @@
 {
   "baseUrl": "https://www.google.com/",
   "chromeWebSecurity": false,
+  "pageLoadTimeout": 10000,
   "viewportWidth": 1500,
   "viewportHeight": 1200,
-  "fixturesFolder": "src/test/fixtures",
+  "fixturesFolder": "src/fixtures",
   "integrationFolder": "src/test/specs",
-  "pluginsFile": "src/test/plugins",
-  "supportFile": "src/test/support",
+  "pluginsFile": "src/plugins",
+  "supportFile": "src/support",
   "reporter": "mochawesome",
   "reporterOptions": {
     "reportDir": "reports/mochawesome-report",
