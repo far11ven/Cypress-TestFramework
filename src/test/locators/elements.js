@@ -1,6 +1,6 @@
 module.exports = {
     HOMEPAGE:{
-        API_LOG_TRACE: "div.trace-btn",
+        SEARCH_TXTBOX: "input[name='q']",
         ICON_GEAR: "div#configuration-page"
     } 
 }

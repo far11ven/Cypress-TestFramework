@@ -5,13 +5,19 @@ class HomePage {
     
     }
 
-    clickAPILogTraceButton() {
-      return cy.get(elements.HOMEPAGE.API_LOG_TRACE).click();
+    clickSearchTxtBox() {
+      return cy.get(elements.HOMEPAGE.SEARCH_TXTBOX).click();
     }
 
-    clickGearIcon() {
-      return cy.get(elements.HOMEPAGE.ICON_GEAR).click();
+    typeInSearchTxtBox(value) {
+      return cy.get(elements.HOMEPAGE.SEARCH_TXTBOX).type(value);
     }
+
+    submitSearchQuery(value) {
+      return cy.get(elements.HOMEPAGE.SEARCH_TXTBOX).type('{enter}');
+    }
+
+
     
   }
   

@@ -9,7 +9,7 @@
     "cy": "./node_modules/.bin/cypress open",
     "cy_test": "node cy_test.js"
   },
-  "author": "",
+  "author": "far11ven",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {

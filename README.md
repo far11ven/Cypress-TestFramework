@@ -1,7 +1,7 @@
 # Cypress-TestFramework
 A simple JS Testing framework using [Cypress](https://github.com/cypress-io/cypress)
 
- ### Dependencies: ###
+### Dependencies: ###
 
 ```"devDependencies": {
     "cypress": "^3.1.5",
@@ -9,8 +9,8 @@ A simple JS Testing framework using [Cypress](https://github.com/cypress-io/cypr
     "mochawesome": "^3.1.1",
     "mochawesome-merge": "^1.0.7"
   }
-  ```
+```
   
- ### Reports: ###
+### Reports: ###
   
-Reports can be found under - *reports\Test Run - 18-03-2019--13_21_31*
+Reports can be found under - * reports\Test Run - 18-03-2019--13_21_31 *

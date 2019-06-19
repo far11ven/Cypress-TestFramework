@@ -1,3 +1,3 @@
 module.exports = {
-  url: "http://localhost:4200"
+  url: "https://www.google.com/"
   }
