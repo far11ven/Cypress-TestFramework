@@ -1,0 +1,22 @@
+{
+  "name": "Cypress-TestFramework",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "",
+  "main": "",
+  "scripts": {
+    "test": "./node_modules/.bin/cypress run --reporter mochawesome",
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "./node_modules/.bin/cypress run",
+    "cy:test": "node cy_test.js"
+  },
+  "author": "far11ven",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^3.2.0",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "mochawesome-merge": "^1.0.7"
+  }
+}
