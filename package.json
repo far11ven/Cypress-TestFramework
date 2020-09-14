@@ -1,5 +1,5 @@
 {
-  "name": "Cypress-TestFramework",
+  "name": "cypress-testframework",
   "version": "1.0.0",
   "description": "",
   "repository": "",
@@ -8,15 +8,16 @@
     "test": "./node_modules/.bin/cypress run --reporter mochawesome",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "./node_modules/.bin/cypress run",
-    "cy:test": "node cy_test.js"
+    "cy:test": "node cy_test.js --record --key b7f2c879-d0c5-4c86-a556-93a4093c5368"
   },
   "author": "far11ven",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "cypress": "^3.2.0",
+    "cypress": "^5.1.0",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
-    "mochawesome-merge": "^1.0.7"
+    "mochawesome-merge": "^1.0.7",
+    "mochawesome-report-generator": "^3.1.5"
   }
 }

@@ -1,7 +1,7 @@
 # Cypress-TestFramework
 A simple JS Testing framework using [Cypress](https://github.com/cypress-io/cypress)
 
-### Dependencies: ###
+### Dependencies:
 
 ```"devDependencies": {
     "cypress": "^3.2.0",
@@ -11,11 +11,15 @@ A simple JS Testing framework using [Cypress](https://github.com/cypress-io/cypr
   }
 ```
   
-### Reports: ###
+### Reports:
   
 Reports can be found under - * reports\Test Run - 18-03-2019--13_21_31 *
 
-### Sample Commands : ###
+### Sample Commands:
 
 * Provide speclist to be run from the commandline
-npm run cy_test -- --speclist=['src/test/specs/spec3.js','src/test/specs/spec1.js']
+ npm run cy:test
+ ~~ npm run cy_test -- --speclist=['src/test/specs/spec3.js','src/test/specs/spec1.js'] ~~
+
+### Cypress Dashboard:
+ npx cypress run --record --key b7f2c879-d0c5-4c86-a556-93a4093c5368

@@ -3,7 +3,6 @@ const marge = require('mochawesome-report-generator')
 const { merge } = require('mochawesome-merge')
 const moment = require('moment')
 
-
 const currRunTimestamp = getTimeStamp();
 
 const sourceReport = {
@@ -31,7 +30,7 @@ cypress.run({
     config: {
         pageLoadTimeout: 10000,
         screenshotsFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/screenshots',
-        video: false,
+        video: true,
         videosFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/videos'
     },
     reporter: 'mochawesome',

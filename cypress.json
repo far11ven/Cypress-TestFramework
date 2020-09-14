@@ -9,10 +9,5 @@
   "pluginsFile": "src/plugins",
   "supportFile": "src/support",
   "reporter": "mochawesome",
-  "reporterOptions": {
-    "reportDir": "reports/mochawesome-report",
-    "overwrite": false,
-    "html": true,
-    "json": true
-  }
+  "projectId": "2mo56e"
 }
