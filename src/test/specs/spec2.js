@@ -10,7 +10,7 @@ describe('My Second Test', function () {
   it('goto API Log Page2', function () {
 
     cy.visit(config.url);
-    cy.title().should('eq', ' Test Store');
+    cy.title().should('eq', 'Google');
   })
 })
 

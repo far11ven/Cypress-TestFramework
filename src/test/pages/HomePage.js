@@ -25,7 +25,7 @@ class HomePage {
     return cy.get(elements.HOMEPAGE.SEARCH_RESULT_FIRST).first().text().then(value => {
 
       cy.log("Text is :", value);
-      expect(value).to.include('Superman Homepage');
+      expect(value).to.include('Superman - Wikipedia');
     });
   }
 
