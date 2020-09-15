@@ -13,6 +13,7 @@ jobs:
         with:
           browser: chrome
           headless: true
+        with:
           record: true
         env:
           # pass the Dashboard record key as an environment variable
