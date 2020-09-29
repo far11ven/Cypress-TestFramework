@@ -1,13 +1,12 @@
 {
-  "baseUrl": "https://www.google.com/",
   "chromeWebSecurity": false,
   "pageLoadTimeout": 10000,
   "viewportWidth": 1500,
   "viewportHeight": 1200,
-  "fixturesFolder": "src/fixtures",
-  "integrationFolder": "src/test/specs",
-  "pluginsFile": "src/plugins",
-  "supportFile": "src/support",
+  "fixturesFolder": "cypress/fixtures",
+  "integrationFolder": "cypress/test/specs",
+  "pluginsFile": "cypress/plugins",
+  "supportFile": "cypress/support",
   "reporter": "mochawesome",
   "projectId": "2mo56e"
 }

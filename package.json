@@ -8,13 +8,18 @@
     "test": "./node_modules/.bin/cypress run --reporter mochawesome",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "./node_modules/.bin/cypress run",
-    "cy:test": "node cy_test.js --record --key b7f2c879-d0c5-4c86-a556-93a4093c5368"
+    "cy:test:dev": "node runner.js --env configFile=dev --browser edge --record --key b7f2c879-d0c5-4c86-a556-93a4093c5368",
+    "cy:test:qa": "node runner.js --env configFile=qa --browser edge --record --key b7f2c879-d0c5-4c86-a556-93a4093c5368",
+    "cy:test": "node runner.js --browser edge --record --key b7f2c879-d0c5-4c86-a556-93a4093c5368"
   },
   "author": "far11ven",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    
+  },
   "devDependencies": {
-    "cypress": "^5.1.0",
+    "cypress": "^5.2.0",
+    "minimist": "^1.2.5",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
     "mochawesome-merge": "^1.0.7",

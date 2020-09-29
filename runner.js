@@ -5,6 +5,9 @@ const moment = require('moment')
 
 const currRunTimestamp = getTimeStamp();
 
+//Get cypress CLI options using 'minimist
+const args = require('minimist')(process.argv.slice(3));
+
 const sourceReport = {
     reportDir: 'reports/' + "Test Run - " + currRunTimestamp + '/mochawesome-report'
 }
@@ -16,17 +19,9 @@ const finalReport = {
     reportTitle: 'Run-Report',
     reportPageTitle: 'Run-Report'
 }
-// const args = require('minimist')(process.argv.slice(2));
-// console.log("args :", args);
-// console.log("speclist :", args['speclist']);
 
-// const speclist = JSON.parse(args['speclist']);
-
-cypress.run({
-    //spec: ["src/test/specs/spec3.js", "src/test/specs/spec1.js"],     //provide spec files manually
-    //spec: "src/test/specs/*",     
-    //spec: speclist, //|| "src/test/specs/*",                          // run all specs if no speclist received from commandline     
-    //spec: speclist,                               
+cypress.run({   
+    ...args,                           
     config: {
         pageLoadTimeout: 10000,
         screenshotsFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/screenshots',
@@ -40,22 +35,37 @@ cypress.run({
         html: true,
         json: true
     }
-}).then(() => {
-        generateReport()
-    },
-    error => {
-        generateReport()
-        console.error(error)
-        process.exit(1)
-    }
-)
+}).then(result => {
 
-function generateReport(options) {
-    return merge(sourceReport).then(report => {marge.create(report, finalReport)
+    generateReport()
+    .then(() => {
+        console.log("All Reports merged");
     })
-}
+    .catch(err => {
+
+        console.error("Getting error while merging reports: ", err.message)
+
+    })
+    .finally(() => {
+        console.log("Test Run Completed");
+       // process.exit()
+      })
+  
+    })
+.catch(err => {
+   
+    generateReport()
+    console.error(err.message)
+    process.exit(1)
+  })
+
 
 function getTimeStamp() {
     var now = new moment().format('DD-MM-YYYY--HH_mm_ss')
     return now
 }
+
+function generateReport() {
+    return  merge(sourceReport).then(report => {marge.create(report, finalReport)});
+    
+  }
