@@ -1,0 +1,22 @@
+{
+  "name": "cypress-testframework",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "",
+  "main": "",
+  "scripts": {
+    "test": "./node_modules/.bin/cypress run",
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "./node_modules/.bin/cypress run"
+  },
+  "author": "far11ven",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^5.2.0",
+    "cypress-cucumber-preprocessor": "^3.0.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}
