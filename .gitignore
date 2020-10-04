@@ -27,6 +27,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+*.mp4
 
 # IDE - VSCode
 .vscode/*
