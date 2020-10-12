@@ -11,7 +11,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v1.16.1
         with:
-          browser: chrome
+          headless: true
           record: true
           config-file: 'qa'
         env:
