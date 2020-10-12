@@ -12,8 +12,8 @@ jobs:
         uses: cypress-io/github-action@v1.16.1
         with:
           browser: chrome
-          headless: true
           record: true
+          config-file: 'qa'
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
