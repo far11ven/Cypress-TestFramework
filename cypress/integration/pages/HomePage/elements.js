@@ -1,6 +1,6 @@
 module.exports = {
     HOMEPAGE:{
         SEARCH_TXTBOX: "input[name='q']",
-        SEARCH_RESULT_FIRST: "div.r"
+        SEARCH_TXTBOX_XPATH: "//input[contains(@name,'q')]"
     } 
 }

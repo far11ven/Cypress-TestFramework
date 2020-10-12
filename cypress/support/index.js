@@ -14,8 +14,13 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-const moment = require('moment')
+//import './commands'
+
+// Alternatively you can use CommonJS syntax:
+// require('./commands')
+import './commands';
+require('cypress-xpath');
+const moment = require('moment');
 const addContext = require('mochawesome/addContext');
 
 // Alternatively you can use CommonJS syntax:
@@ -36,6 +41,25 @@ Cypress.on('test:after:run', (test, runnable) => {
   console.log("test.state  :", test.state);
   console.log("Cypress.spec.name  :", Cypress.spec.name);
   console.log("test.title  :", test.title);
+  console.log(" window.testState :", window.testState);
+
+  let scenarioName = window.testState.currentScenario.name;
+  let stepResult = window.testState.stepResults;
+
+  window.testState.scenarioSteps[scenarioName].forEach(function(currStep,index){ 
+    console.log("window.testState.scenarioSteps[scenarioName]",stepResult[index].status); 
+    addContext({ test }, {
+      title: currStep.keyword + " " +  currStep.text,
+      value: stepResult[index].status + " " + stepResult[index].duration
+    })
+  });
+
+  if (test.state === 'failed' || test.state === 'passed') {
+    addContext({ test }, {
+      title: 'Test Run Video: ' + '>> videos/' + Cypress.spec.name + '.mp4',
+      value: 'videos/' + Cypress.spec.name + '.mp4'
+    })
+  }
 
   if (test.state === 'failed') {
     addContext({ test }, {

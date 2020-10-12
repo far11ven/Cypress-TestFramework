@@ -1,18 +1,13 @@
 {
-  "baseUrl": "https://www.google.com/",
-  "chromeWebSecurity": false,
-  "pageLoadTimeout": 10000,
-  "viewportWidth": 1500,
-  "viewportHeight": 1200,
-  "fixturesFolder": "src/fixtures",
-  "integrationFolder": "src/test/specs",
-  "pluginsFile": "src/plugins",
-  "supportFile": "src/support",
+  "testFiles": "**/*.{feature,features}",
+  "ignoreTestFiles": [
+    "**/stepDefinitions/*",
+    "*.js",
+    "*.md"
+  ],
   "reporter": "mochawesome",
   "reporterOptions": {
-    "reportDir": "reports/mochawesome-report",
-    "overwrite": false,
-    "html": true,
-    "json": true
-  }
+    "reportFilename": "test-report"
+  },
+  "projectId": "2pw1r7"
 }
