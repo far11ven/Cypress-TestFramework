@@ -19,7 +19,7 @@ const finalReport = {
     reportDir: 'reports/' + "Test Run - " + currRunTimestamp,
     saveJson: true,
     reportFilename: 'Run-Report',
-    reportTitle: "Test Run - " + currRunTimestamp,
+    reportTitle: 'Run-Report',
     reportPageTitle: 'Run-Report'
 }
 
@@ -44,23 +44,21 @@ cypress.run({
     // generate a unified report, once Cypress test run is done
     generateReport()
     .then(() => {
-        console.log("All Reports merged");
+        console.log("Test Report has been generated");
     })
     .catch(err => {
-        console.error("Getting error while merging reports: ", err.message)
-
+        console.error("Getting error while generating reports: ", err.message)
     })
     .finally(() => {
-        console.log("Test Run Completed");
-       // process.exit()
-      })
+        console.log("Test Run Completed at " + result.endedTestsAt);
+        console.log("Total time taken " + new Date(result.totalDuration).toISOString().substr(11, 8));
+    })
   
     })
 .catch(err => {
-    generateReport()
     console.error(err.message)
     process.exit(1)
-})
+  })
 
 //get current timestamp
 function getTimeStamp() {
@@ -70,6 +68,16 @@ function getTimeStamp() {
 
 //generate unified report from sourecReport.files directory and create a unified report and store it in finalReport.reportDir location
 function generateReport() {
-    return  merge(sourceReport).then(report => {marge.create(report, finalReport)});
-    
+    return  merge(sourceReport).then(report => {
+        marge.create(report, finalReport)
+        .then(result => {
+            console.log("Run report saved at " + result[0]);
+        })
+        .catch(err => {
+            console.error("Getting error while merging reports: ", err.message)
+        })
+        .finally(() => {
+            process.exit()
+        });
+    });
 }
