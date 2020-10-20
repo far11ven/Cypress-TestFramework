@@ -10,7 +10,7 @@
     "cy:run": "./node_modules/.bin/cypress run",
     "cy:test:dev": "node runner.js cypress run --env configFile=dev",
     "cy:test:qa": "node runner.js cypress run --env configFile=qa",
-    "cy:test:record":"node runner.js cypress run --record --key xxxxxxx --env TAGS=\"@UI\",configFile=qa"
+    "cy:test:record":"node runner.js cypress run --record --key xxxxx-xxxx-xxxx-xxxxx --env TAGS=\"@API\",configFile=qa"
   },
   "author": "far11ven",
   "license": "ISC",
