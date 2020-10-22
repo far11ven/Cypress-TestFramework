@@ -8,15 +8,19 @@ const currRunTimestamp = getTimeStamp();
 
 //Get cypress CLI options using 'minimist
 const args = require('minimist')(process.argv.slice(3));
+console.log("args",args);
+
+// get environment from args..
+const environment = getEnvironment(args);
 
 //source directory where individual test reports are created
 const sourceReport = {
-    files: ["./reports/" + "Test Run - " + currRunTimestamp + "/mochawesome-report/*.json"],
+    files: ["./reports/" + environment + "/" + "Test Run - " + currRunTimestamp + "/mochawesome-report/*.json"]
 }
 
 //destination directory where we want our unified .html and .json file to be placed
 const finalReport = {
-    reportDir: 'reports/' + "Test Run - " + currRunTimestamp,
+    reportDir: 'reports/'+ environment + "/" +  "Test Run - " + currRunTimestamp,
     saveJson: true,
     reportFilename: 'Run-Report',
     reportTitle: 'Run-Report',
@@ -28,18 +32,19 @@ cypress.run({
     ...args,                           
     config: {
         pageLoadTimeout: 10000,
-        screenshotsFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/screenshots',
+        screenshotsFolder: 'reports/' + environment + "/" + "Test Run - " + currRunTimestamp + '/screenshots',
         video: true,
-        videosFolder: 'reports/' + "Test Run - " + currRunTimestamp + '/videos'
+        videosFolder: 'reports/' + environment + "/" + "Test Run - " + currRunTimestamp + '/videos'
     },
     reporter: 'mochawesome',
     reporterOptions: {
-        reportDir: 'reports/' + "Test Run - " + currRunTimestamp + '/mochawesome-report',
+        reportDir: 'reports/' + environment + "/" + "Test Run - " + currRunTimestamp + '/mochawesome-report',
         overwrite: false,
         html: true,
         json: true
     }
-}).then(result => {
+})
+.then(result => {
 	
     // generate a unified report, once Cypress test run is done
     generateReport()
@@ -59,6 +64,44 @@ cypress.run({
     console.error(err.message)
     process.exit(1)
   })
+  
+// identify an environment; default is "qa"
+function getEnvironment(args){
+
+ let environment;
+
+  if(args.env){
+    if(args.env === true){
+		// if --env flag is passed from CLI but without following any arguments
+        environment = "qa";
+        return "qa";
+    }
+
+  const getEnv = args.env.split(",");
+ 
+  getEnv.map((curr, index) => {
+
+    const envProperty = curr.split("=");
+
+    if(envProperty[0] === 'configFile'){
+        environment = envProperty[1];
+    }
+
+    if(index >= getEnv.length && environment === undefined){
+		// if --env flag is passed from CLI, but doesn't contain any 'configFile' argument
+        environment = "qa";
+    }
+
+ })
+
+ return environment;
+
+} else{
+	// if no --env flag is passed from CLI
+    environment = "qa";
+    return "qa";
+ }
+}
 
 //get current timestamp
 function getTimeStamp() {
