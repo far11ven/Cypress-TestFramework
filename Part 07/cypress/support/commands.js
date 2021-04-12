@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 const addContext = require('mochawesome/addContext');
+const _ = require('lodash');
 
 Cypress.Commands.add("text", { prevSubject: true }, (subject, options) => {
     return subject.text();
