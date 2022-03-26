@@ -1,0 +1,21 @@
+{
+"testFiles": "**/*.{feature,features}",
+"ignoreTestFiles": ["**/stepDefinitions/*","*.js", "*.md"],
+"reporter": "mochawesome",
+"reporterOptions": {
+    "reportFilename": "test-report"
+  },
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+},
+"env": {
+  "DB": {
+    "user": "myuser",
+    "host": "127.0.0.1",
+    "database": "pokemon",
+    "password": "pass",
+    "port": 32763
+}
+}
+}
