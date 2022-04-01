@@ -74,3 +74,6 @@ RUN ls
 RUN npm install
 
 ENTRYPOINT ["npm", "run"]
+
+#then you can directly run tests inside a container using image built with this file
+# docker run -it far11ven/cypress-included-v9.2.0:2.0.0 cy:test:qa
