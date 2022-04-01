@@ -1,0 +1,34 @@
+{
+  "name": "cypress-testframework",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "",
+  "main": "",
+  "scripts": {
+    "test": "./node_modules/.bin/cypress run",
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "./node_modules/.bin/cypress run",
+    "cy:test:dev": "node runner.js cypress run --env configFile=dev",
+    "cy:test:qa": "node runner.js cypress run --env TAGS=\"@API\" configFile=qa"
+  },
+  "author": "far11ven",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "9.2.0",
+    "cypress-cucumber-preprocessor": "^3.0.0",
+    "cypress-xpath": "^1.6.0",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.5",
+    "mocha": "^8.1.3",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "pg": "^8.7.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
+}
