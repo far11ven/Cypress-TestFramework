@@ -69,7 +69,8 @@ RUN echo  " node version:    $(node -v) \n" \
 #Instalclone Cypress-TestFramework to /e2e
 WORKDIR /e2e
 RUN git clone https://github.com/far11ven/Cypress-TestFramework.git /e2e
-WORKDIR "/e2e/Cypress-TestFramework/Part 10"
+WORKDIR "/e2e/Part 10"
 RUN ls
+RUN npm install
 
 ENTRYPOINT ["npm", "run"]
