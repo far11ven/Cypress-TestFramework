@@ -1,4 +1,5 @@
 {
+"projectId": "2pw1r7",
 "testFiles": "**/*.{feature,features}",
 "ignoreTestFiles": ["**/stepDefinitions/*","*.js", "*.md"],
 "reporter": "mochawesome",
