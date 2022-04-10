@@ -11,4 +11,4 @@ jobs:
     container: cypress/included:9.2.0
     steps:
       - uses: actions/checkout@v1
-      - run: cd "Part 09" && npm install && npm run cy:record:qa
+      - run: cd "Part 10" && npm install && npm run cy:record:qa
