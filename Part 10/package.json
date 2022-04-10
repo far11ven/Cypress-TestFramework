@@ -9,7 +9,8 @@
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "./node_modules/.bin/cypress run",
     "cy:test:dev": "node runner.js cypress run --env configFile=dev",
-    "cy:test:qa": "node runner.js cypress run --env TAGS=\"@API\" configFile=qa"
+    "cy:test:qa": "node runner.js cypress run --env TAGS=\"@API\" configFile=qa",
+    "cy:record:qa": "node runner.js cypress run --env TAGS=\"@API\" configFile=qa --record --key 04cca009-ab36-4310-b1fd-4f09a4a1a75d --tag \"release,v1.10\""
   },
   "author": "far11ven",
   "license": "ISC",
