@@ -14,4 +14,4 @@ jobs:
     container: cypress/included:9.2.0
     steps:
       - uses: actions/checkout@v2
-      - run: cd "Part 10" && npm install && npm run cy:record:parallel:qa
+      - run: cd "Part 10" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
