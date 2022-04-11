@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
      matrix:
-      job: [0, 1, 2, 3]
+      job: [0, 1, 2, 3, 4]
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
     container: cypress/included:9.2.0
