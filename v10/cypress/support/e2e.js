@@ -30,7 +30,7 @@ before(function () {
 //runs once before each test
 beforeEach(function () {
   console.log("beforeEach"); 
-  cy.clearTempState();
+  //cy.clearTempState();
 })
 
 //runs once before each test
