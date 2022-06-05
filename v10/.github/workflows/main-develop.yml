@@ -6,12 +6,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    strategy:
-     matrix:
-      job: [0, 1, 2, 3, 4]
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
     container: cypress/included:10.0.2
     steps:
-      - uses: actions/checkout@v2
-      - run: cd "v10" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
+      - uses: actions/checkout@v1
+      - run: cd "v10" && npm install && npm run cy:test:qa
