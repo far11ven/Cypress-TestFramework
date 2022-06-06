@@ -27,5 +27,8 @@
     "mochawesome-report-generator": "^6.2.0",
     "moment": "^2.29.1",
     "pg": "^8.7.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }

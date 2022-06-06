@@ -1,5 +1,5 @@
-import HomePage from '../../../e2e/pages/HomePage/HomePage';
-import ResultPage from '../../../e2e/pages/ResultPage/ResultPage';
+import HomePage from '../../../pages/HomePage/HomePage';
+import ResultPage from '../../../pages/ResultPage/ResultPage';
 const addContext = require('mochawesome/addContext');
 
 const homePage = new HomePage();
