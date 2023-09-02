@@ -27,7 +27,7 @@ jobs:
     
     # Install dependencies by running npm install
       - name: Dependency Installation
-        run: npm install
+        run: cd "v13" && npm install
 
     # Execute automated tests nightly and send execution summary to cypress cloud dashboard
       - name: Test Execution Nightly Execution
@@ -37,7 +37,7 @@ jobs:
         with: 
           install: false
           record: true
-          command: node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --tag "nightly"
+          command: cd "v13" && node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --tag "nightly"
           
     # Cypress Test Result Details          
       - name: Print Cypress Cloud URL
