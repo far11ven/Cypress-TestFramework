@@ -11,7 +11,7 @@ env:
 
 jobs:
   nightly_run:
-    runs-on: cypress
+    runs-on: ubuntu-latest
     name: Nightly Run
     steps:   
     # Checkout code from this repository
