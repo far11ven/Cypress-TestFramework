@@ -87,8 +87,6 @@ function getEnvironment(args) {
 	let environment;
 	let getEnv;
 
-	console.log("args.env", args.env)
-
 	if (args.env) {
 		if (args.env === true) {
 			// if --env flag is passed from CLI but without following any arguments
