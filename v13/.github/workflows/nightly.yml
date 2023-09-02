@@ -1,4 +1,4 @@
-name: Doc-AI Test Automation (Nightly)
+name: Test Execution (Nightly)
 on:
   workflow_dispatch:
   schedule:
@@ -6,8 +6,8 @@ on:
     - cron: 0 9 * * 1,2,3,4,5
 
 env:
-  ENV_NAME: "stg"
-  TAGS: "@login"
+  ENV_NAME: "qa"
+  TAGS: "@all"
 
 jobs:
   nightly_run:
@@ -30,14 +30,14 @@ jobs:
         run: npm install
 
     # Execute automated tests nightly and send execution summary to cypress cloud dashboard
-      - name: Doc-AI Test Automation Nightly Execution
+      - name: Test Execution Nightly Execution
         id: run_step
         uses: cypress-io/github-action@v6.4.0
         continue-on-error: true
         with: 
           install: false
           record: true
-          command: node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.DOC_AI_TESTING_CYPRESS_RECORD_KEY }} --tag "nightly"
+          command: node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --tag "nightly"
           
     # Cypress Test Result Details          
       - name: Print Cypress Cloud URL

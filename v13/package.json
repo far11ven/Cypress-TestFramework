@@ -1,5 +1,5 @@
 {
-  "name": "cypress-testframework",
+  "name": "Cypress-TestFramework",
   "version": "2.0.0",
   "description": "",
   "repository": "",
@@ -7,11 +7,11 @@
   "scripts": {
     "cy:test": "cypress run --e2e",
     "cy:open": "cypress open --e2e",
-    "cy:open:qa": "cypress open --e2e --browser chrome --env envFile=qa",
     "cy:test:dev": "node runner.js cypress run --env envFile=dev",
+    "cy:open:qa": "cypress open --e2e --browser chrome --env envFile=qa",
     "cy:test:qa": "node runner.js cypress run --env envFile=qa,TAGS=\"@all\"",
-    "cy:record:qa": "node runner.js cypress run --env envFile=qa,TAGS=\"@all\" --video --record --key 04cca009-ab36-4310-b1fd-4f09a4a1a75d --tag \"release,v1.10\"",
-    "cy:record:parallel:qa": "node runner.js cypress run --env envFile=qa,TAGS=\"@all\" --record --parallel --key 04cca009-ab36-4310-b1fd-4f09a4a1a75d --tag \"release,v1.10\""
+    "cy:record:qa": "node runner.js cypress run --env envFile=qa,TAGS=\"@all\" --video --record --key 04cca009-ab36-4310-b1fd-4f09a4a1a75d --tag \"release, pre\"",
+    "cy:record:parallel:qa": "node runner.js cypress run --env envFile=qa,TAGS=\"@all\" --record --parallel --key 04cca009-ab36-4310-b1fd-4f09a4a1a75d --tag \"release, pre\""
   },
   "author": "far11ven",
   "license": "ISC",
