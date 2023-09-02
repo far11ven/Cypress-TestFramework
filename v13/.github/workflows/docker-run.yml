@@ -1,14 +1,74 @@
 name: run-on-docker
 on:
-  # Triggers the workflow on push or pull request events but only for the develop branch
-  push:
-    branches: [ develop ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'The target environment-keyword relating to <env>.json, example: dev for (dev.config.json)'
+        options: 
+        - dev
+        - qa
+        required: true
+        default: "qa"
+      tags:
+        required: true
+        default: "@all"
+        type: string
+        description: 'provide tags expression for running tests'
+      record:
+        type: boolean
+        description: 'Record and publish to Cypress Dashboard'
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
-    container: cypress/included:10.0.2
-    steps:
-      - uses: actions/checkout@v1
-      - run: cd "v10" && npm install && npm run cy:test:qa
+    container: cypress/included:13.1.0
+    steps:   
+    # Checkout code in from this repository
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+    
+    # Log Environment details
+      - name: User Input Details
+        run: |
+          echo "running on environment ${{ github.event.inputs.environment }} from branch ${{ github.ref }}"
+          echo "Tags provided: ${{ github.event.inputs.tags }}"
+          echo "Cypress record: ${{ github.event.inputs.record }}"
+
+    # Install dependencies by running npm install
+      - name: Dependency Installation
+        run: cd "v13" && npm install
+    
+    # Execute automated tests and send execution summary to cypress cloud dashboard with Record flag true
+      - name: Manual Execution with Record
+        id: run_step_with_record
+        if: ${{ github.event.inputs.record == 'true' }}
+        run: |
+          node runner.js cypress run --e2e --env envFile=${{ github.event.inputs.environment }},TAGS="${{ github.event.inputs.tags }}" --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+
+    # Execute automated tests and send execution summary to cypress cloud dashboard
+      - name: Manual Execution without Record
+        id: run_step
+        if: ${{ github.event.inputs.record != 'true' }}
+        run: |
+          node runner.js cypress run --e2e --env envFile=${{ github.event.inputs.environment }},TAGS="${{ github.event.inputs.tags }}"
+    
+    # Cypress Test Result Details          
+      - name: Print Cypress Cloud URL
+        run: |
+          echo Cypress finished with: ${{ steps.run_step.outcome }}
+          echo Outputs: ${{ steps.run_step.outputs }}
+          echo Outputs_JSON: ${{  toJSON(steps.run_step.outputs) }}
+          echo See results at ${{ steps.run_step.outputs.dashboardUrl }}
+          
+    # Upload test artifacts 
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v3.1.0
+        if: success()
+        with:
+          name: reports
+          path: reports/
+          retention-days: 30
