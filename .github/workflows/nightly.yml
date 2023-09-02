@@ -29,6 +29,10 @@ jobs:
       - name: Dependency Installation
         run: cd "v13" && npm install
 
+    # Current Directory
+      - name: PWD
+        run: ls
+
     # Execute automated tests nightly and send execution summary to cypress cloud dashboard
       - name: Test Execution Nightly Execution
         id: run_step
@@ -37,7 +41,7 @@ jobs:
         with: 
           install: false
           record: true
-          command: cd "v13" && node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --tag "nightly"
+          command: node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --tag "nightly"
           
     # Cypress Test Result Details          
       - name: Print Cypress Cloud URL
