@@ -47,14 +47,14 @@ jobs:
         id: run_step_with_record
         if: ${{ github.event.inputs.record == 'true' }}
         run: |
-          node runner.js cypress run --e2e --env envFile=${{ github.event.inputs.environment }},TAGS="${{ github.event.inputs.tags }}" --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+          cd "v13" && node runner.js cypress run --e2e --env envFile=${{ github.event.inputs.environment }},TAGS="${{ github.event.inputs.tags }}" --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
 
     # Execute automated tests and send execution summary to cypress cloud dashboard
       - name: Manual Execution without Record
         id: run_step
         if: ${{ github.event.inputs.record != 'true' }}
         run: |
-          node runner.js cypress run --e2e --env envFile=${{ github.event.inputs.environment }},TAGS="${{ github.event.inputs.tags }}"
+          cd "v13" && node runner.js cypress run --e2e --env envFile=${{ github.event.inputs.environment }},TAGS="${{ github.event.inputs.tags }}"
     
     # Cypress Test Result Details          
       - name: Print Cypress Cloud URL
