@@ -1,0 +1,68 @@
+name: Doc-AI Test Automation (Nightly)
+on:
+  workflow_dispatch:
+  schedule:
+  # Scheduled to execute at 10:00 PM in UTC which means 12:00 AM in CEST (Day-light Saving)
+    - cron: 0 9 * * 1,2,3,4,5
+
+env:
+  ENV_NAME: "stg"
+  TAGS: "@login"
+
+jobs:
+  nightly_run:
+    runs-on: cypress
+    name: Nightly Run
+    steps:   
+    # Checkout code from this repository
+      - name: Checkout
+        uses: actions/checkout@v3
+  
+    # Log Environment details
+      - name: Environment Details
+        run: |
+          echo "running on environment ${{ env.ENV_NAME }} from branch ${{ github.ref }}"
+          echo "Tags provided: ${{ env.TAGS }}"
+          echo "Cypress record: true"
+    
+    # Install dependencies by running npm install
+      - name: Dependency Installation
+        run: npm install
+
+    # Execute automated tests nightly and send execution summary to cypress cloud dashboard
+      - name: Doc-AI Test Automation Nightly Execution
+        id: run_step
+        uses: cypress-io/github-action@v6.4.0
+        continue-on-error: true
+        with: 
+          install: false
+          record: true
+          command: node runner.js cypress run --e2e --env envFile=${{ env.ENV_NAME }},TAGS=${{ env.TAGS }} --record --key ${{ secrets.DOC_AI_TESTING_CYPRESS_RECORD_KEY }} --tag "nightly"
+          
+    # Cypress Test Result Details          
+      - name: Print Cypress Cloud URL
+        run: |
+          echo Cypress finished with: ${{ steps.run_step.outcome }}
+          echo Outputs: ${{ steps.run_step.outputs }}
+          echo Outputs_JSON: ${{  toJSON(steps.run_step.outputs) }}
+          echo See results at ${{ steps.run_step.outputs.dashboardUrl }}
+
+    # # Send Notification to Teams Channel QA Team > General
+    #   - name: Send Notification to Teams Channel
+    #     uses: Skitionek/notify-microsoft-teams@v1.0.8
+    #     if: always()
+    #     with:
+    #       webhook_url: ${{ secrets.TEAMS_WEBHOOK }}
+    #       overwrite: "{ title: `Nightly Test Run Status`, sections: [{ activityTitle: `Run Info:`, activitySubtitle: `Started by GitHub`, facts: [{ name: `Run from branch`, value: `${{ github.ref }}` }, { name: `Environment`, value: `${{ github.event.inputs.environment }}` }, { name: `Tags`, value: `${{ github.event.inputs.tags }}` }, { name: `Recorded`, value: `true` }], markdown: true }], potentialAction: [{ \"@type\": `OpenUri`, name: `Repository`, targets: [{ os: `default`, uri: `https://github.com/${{ github.repository }}` }] }, { \"@type\": `OpenUri`, name: `Workflow Run`, targets: [{ os: `default`, uri: `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}` }] }, { \"@type\": `OpenUri`, name: `Cypress Dashboard`, targets: [{ os: `default`, uri: `${{ steps.run_step.outputs.dashboardUrl }}` }] }] }"
+    #       needs: ${{ toJSON(needs) }}
+    #       steps: ${{ toJSON(steps) }}
+    #       job: ${{ toJSON(job) }}
+          
+    # Upload test artifacts
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v3.1.0
+        if: success()
+        with:
+          name: reports
+          path: reports/
+          retention-days: 15

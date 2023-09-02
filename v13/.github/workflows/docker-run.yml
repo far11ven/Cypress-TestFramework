@@ -1,0 +1,14 @@
+name: run-on-docker
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ develop ]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    # Docker image with Cypress pre-installed
+    # https://github.com/cypress-io/cypress-docker-images/tree/master/included
+    container: cypress/included:10.0.2
+    steps:
+      - uses: actions/checkout@v1
+      - run: cd "v10" && npm install && npm run cy:test:qa
