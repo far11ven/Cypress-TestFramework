@@ -65,10 +65,10 @@ cypress.run({
 			json: true
 		}
 	})
-	.then(testResults => {
+	.then(finalResult => {
 
 		// generate a unified report, once Cypress test run is done
-		generateReport(mergeOptions, testResults)
+		generateReport(mergeOptions, finalResult)
 			.then(() => {
 				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Test Report has been generated.`)
 			})
@@ -150,7 +150,7 @@ function getRunTimeStamp() {
 }
 
 // generate unified report from sourceReport.files directory and create a unified report and store it in finalReport.reportDir location
-function generateReport(mergeOptions, testResults) {
+function generateReport(mergeOptions, finalResult) {
 	return merge(mergeOptions).then(report => {
 		marge.create(report, finalReport)
 			.then(result => {
@@ -160,44 +160,47 @@ function generateReport(mergeOptions, testResults) {
 				console.error(`[Cypress-TestFramework][${new Date().toISOString()}] Error while merging reports: `, err.message)
 			})
 			.finally(() => {
-				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Test Run Completed on - ` + testResults.endedTestsAt)
-				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Total duration - ` + testResults.totalDuration)
+				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Test Run Completed on - ` + finalResult.endedTestsAt)
+				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Total duration - ` + finalResult.totalDuration)
 
 				//calculate total time taken for test run
-				let endDate = new Date(testResults.endedTestsAt)
-				let startDate = new Date(testResults.startedTestsAt)
+				let endDate = new Date(finalResult.endedTestsAt)
+				let startDate = new Date(finalResult.startedTestsAt)
 				let gitHubActions = {};
 
 				const hours = parseInt(Math.abs(endDate - startDate) / (1000 * 60 * 60) % 24)
 				const minutes = parseInt(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 60) % 60)
 				const seconds = parseInt(Math.abs(endDate.getTime() - startDate.getTime()) / (1000) % 60)
-
-				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Total time taken - ${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`)
-				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Total ${testResults.totalPassed} test passed out of ${testResults.totalTests} tests`)
-				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Test Run Status - ` + testResults.status)
-
+				
 				// stats for GitHub Actions
-				gitHubActions.projectId = testResults.config.projectId;
+				gitHubActions.projectId = finalResult.config.projectId;
 				gitHubActions.envUrl = args.config.baseUrl;
-				gitHubActions.totalTests = testResults.totalTests;
-				gitHubActions.totalPassed = testResults.totalPassed;
-				gitHubActions.totalSuites = testResults.totalSuites;
-
+				gitHubActions.suites = finalResult.totalSuites;
+				gitHubActions.tests = finalResult.totalTests;
+				gitHubActions.passed = finalResult.totalPassed;
+				gitHubActions.failed = finalResult.totalFailed;
+				gitHubActions.skipped = finalResult.totalSkipped;
+				gitHubActions.pending = finalResult.totalPending;
 
 				// used for signalling GitHub Actions Teams Notifications about the Test Run Success/Failure 
-				if (testResults.totalFailed === undefined) {
+				if (finalResult.totalFailed === undefined) {
 					gitHubActions.status = "failure"
 					console.log(gitHubActions)
 
-				} else if (testResults.totalFailed > 0) {
+				} else if (finalResult.totalFailed > 0) {
 					gitHubActions.status = "failure"
 					console.log(gitHubActions)
 
-				} else if (testResults.totalFailed == 0) {
+				} else if (finalResult.totalFailed == 0) {
 					gitHubActions.status = "success"
 					console.log(gitHubActions)
 
 				}
+
+				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Total time taken - ${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`)
+				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] Total ${finalResult.totalPassed} test(s) passed out of ${finalResult.totalTests} tests`)
+				console.log(`[Cypress-TestFramework][${new Date().toISOString()}] ======================== Test Run was complete ========================`)
+
 				process.exit()
 			})
 	})

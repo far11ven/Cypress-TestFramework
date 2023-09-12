@@ -1,6 +1,6 @@
 module.exports = {
     HOMEPAGE:{
-        SEARCH_TXTBOX: "input[name='q']",
-        SEARCH_TXTBOX_XPATH: "//input[contains(@name,'q')]"
+        SEARCH_TXTBOX: "textarea[name='q']",
+        SEARCH_TXTBOX_XPATH: "//textarea[contains(@name,'q')]"
     } 
 }

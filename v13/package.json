@@ -30,6 +30,8 @@
     "pg": "^8.7.1"
   },
   "cypress-cucumber-preprocessor": {
+    "filterSpecs": true,
+    "omitFiltered": true,
     "nonGlobalStepDefinitions": true,
     "stepDefinitions": "cypress/e2e/common/stepDefinitions/**/*.{js,mjs,ts,tsx}"
   }
